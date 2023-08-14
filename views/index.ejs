@@ -1,0 +1,81 @@
+<%- include('header.ejs', { title: '首页' }); %>
+    <div class="bigTitle">
+        <h1 class="textShadow">首页</h1>
+        <p class="textShadow"><%= getAisatsu() %>，请选择您的关卡。</p>
+    </div>
+    <div class="mainBody">
+        <div class="stageChooser">
+            <!-- 关卡卡片 -->
+            <% let flag = -1;
+            for(let i = 0; i < stages.length; ++i) {
+                let isLocked = false;
+                for(let p of stages[i].pre){
+                    if(!finish[p]){
+                        isLocked = true;
+                        break;
+                    }
+                }
+                if(!isLocked && !finish[i]  && flag == -1)
+                    flag = i;
+             %>
+                <div class="stage shadow" locked="<%= isLocked %>" id="stage<%- i %>">
+                    <!-- 关卡头部信息 -->
+                    <div class="stageInfo">
+                        <!-- 自动生成汉字关数 -->
+                        <div class="stageId">第<span class="idHanzi"><%= num2hanzi(i) %></span>关</div>
+                        <!-- 右侧小锁 -->
+                        <% if(finish[i]) { %>
+                            <i class="fa fa-check unlocked"></i>
+                        <% } else if(isLocked) { %>
+                            <i class="fa fa-lock locked"></i>
+                        <% } else { %>
+                            <i class="fa fa-unlock-alt unlocked"></i>
+                        <% } %>
+                    </div>
+                    <!-- 关卡大标题 -->
+                    <div class="stageTitle textShadow jp">
+                        <%= stages[i].title %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        <div class="selector">
+            <div class="selector-highlight">
+                <!-- 黄色高亮选择器 -->
+                <!-- 星星是送给所有努力的人的 -->
+                <i class="fa fa-star textShadow"></i>
+            </div>
+        </div>
+    </div>
+    <% if(flag < 0 || flag >= stages.length)
+        flag = 0; %>
+    <script>
+        // 滚动到第<%= num2hanzi(flag) %>关
+
+        var currStage = <%- flag %>; // 当前关卡
+        var numStage = <%- stages.length %>; // 总关卡数
+        
+        $(() => {
+            // 一定的延迟
+            setTimeout(() => {
+                // 单次滚动
+                $('div.stageChooser').animate({
+                    left: '-=' + (274 * <%- flag %>) + 'px'
+                }, <%- flag %> * 300);
+
+                // 多次滚动
+                // 不太好看，被弃用
+                // for (let i = 0; i < 0; ++i) {
+                //     // jQuery 是异步的
+                //     // 不过也没事
+                //     $('div.stageChooser').animate({
+                //         left: '-=274px'
+                //     }, 700);
+                // }
+            }, 300);
+        });
+    </script>
+    <script src="/static/js/index/fontSizeChanger.js"></script>
+    <script src="/static/js/index/stageSwitch.js"></script>
+    <script src="/static/js/index/stageEnter.js"></script>
+    <%- include('footer.ejs'); %>

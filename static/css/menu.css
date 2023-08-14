@@ -1,0 +1,111 @@
+/* 首页「选择关卡」对应样式 */
+
+div.stageChooser {
+    display: flex;
+
+    /* 默认以第一关为屏幕中心 */
+    /* stage 自带宽度为 250px，加上 margin 和 border 应该是 (250 + 10 * 2 + 2 * 2)px */
+    /* 先向右移动页面 50%，再想左移动 (250 + 10 * 2 + 2 * 2) / 2 px */
+    position: absolute;
+    left: calc(50% - 137px);
+}
+
+div.stage {
+    /* 大小 */
+    width: 250px;
+    height: 250px;
+    /* 禁止缩放 */
+    flex-shrink: 0;
+    flex-grow: 0;
+    /* 边框 */
+    border: 2px solid #8db3f1;
+    border-radius: 5px;
+    /* 背景颜色 */
+    background-color: #eff;
+    /* 边界 */
+    margin: 0 10px;
+
+    /* 内部构造 */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+
+div.stageInfo {
+    flex-basis: 20%;
+    /* 防止与 stage 边界接触 */
+    padding: 5px 15px;
+    font-size: 30px;
+    /* 内部构造 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.stageId {
+    /* 颜色柔和 */
+    color: #456;
+
+    /* 使楷体字对齐 */
+    display: flex;
+    align-items: center;
+}
+
+span.idHanzi {
+    font-family: '楷体-简', '楷体';
+    font-weight: bold;
+    font-size: larger;
+}
+
+i.locked {
+    color: #ffa500;
+    font-size: larger;
+}
+
+i.unlocked {
+    color: #008000;
+    font-size: larger;
+}
+
+div.stageTitle {
+    flex-basis: 80%;
+    /* 内部以横轴正中对齐 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 字体放大 */
+    /* font-weight: bold; */
+
+    /* 字体大小，由 fontSizeChanger 处理，这里不用管了 */
+    /* font-size: 20px; */
+
+    /* 字体向右上方 */
+    transform: rotate(-1deg);
+}
+
+.jp {
+    /* 显示日语，使用日语字体 */
+    font-family: '游明朝体';
+}
+
+div.selector {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+div.selector-highlight {
+    /* 保证和 stage 相同的大小 */
+    height: 250px;
+    width: 250px;
+    border-radius: 5px;
+    /* 高亮边缘 */
+    box-shadow: 0 -6px 10px #ff0, 0 4px 15px rgba(255, 255, 0, 0.8);
+    transition: ease 2s;
+    /* 中部问号 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 200px;
+    color: #ff0;
+}

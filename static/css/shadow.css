@@ -1,0 +1,12 @@
+/* 阴影 */
+
+/* 对于 div */
+div.shadow {
+    box-shadow: 0 -6px 10px #dff, 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.25s;
+}
+
+/* 对于文字 */
+.textShadow {
+    text-shadow: -6px 6px 10px rgba(0, 0, 0, 0.3);
+}

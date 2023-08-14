@@ -1,0 +1,69 @@
+/* 页面布局与基本组件 */
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    /* 鼠标被吃掉了 QWQ */
+    cursor: none !important;
+}
+
+div.container {
+    /* 全屏幕 */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /* 竖排布局 */
+    display: flex;
+    flex-direction: column;
+    /* 颜色 */
+    background-color: #dff;
+    color: #233;
+    /* 文字默认大小 */
+    /* 原 16px */
+    font-size: 20px;
+    /* 禁止溢出 */
+    overflow: hidden;
+}
+
+/* 顶部 */
+div.bigTitle {
+    /* 上 30%，用于大标题显示 */
+    flex-basis: 30%;
+    /* 默认放置在底部中央 */
+    display: flex;
+    flex-direction: column;
+    /* 底部 */
+    justify-content: flex-end;
+    /* 中央 */
+    align-items: center;
+}
+
+div.smallTitle {
+    /* 上 10%，用于小标题显示 */
+    flex-basis: 10%;
+    /* 左右分割 */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.enterKeys {
+    /* 上 10% - 30%，用于显示打字信息 */
+    flex-basis: 20%;
+    /* 偏下设计 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* 底部 */
+div.mainBody {
+    flex-basis: 70%;
+
+    /* 以横向中轴对齐元素 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

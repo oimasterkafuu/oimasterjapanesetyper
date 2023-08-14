@@ -1,0 +1,169 @@
+<%- include('header.ejs', { title: '第' + num2hanzi(stageId) + '关' }); %>
+    <div class="smallTitle">
+        <h2 class="textShadow">
+            第<span class="idHanzi">
+                <%= num2hanzi(stageId) %>
+            </span>关
+        </h2>
+        <p class="textShadow jp secondTitle">
+            <%= stage.title %>
+        </p>
+    </div>
+    <div class="enterKeys">
+        <div id="keys" class="jp textShadow">
+            <!-- 这里放的是输入的文字 -->
+        </div>
+    </div>
+    <div class="mainBody">
+        <!-- 键盘 -->
+        <div class="keyboard shadow jp" id="keyboard">
+            <div class="keyboardRow">
+                <!-- 痛苦 * 1 -->
+                <div class="key shadow op" id="keyInfo"></div>
+                <div class="key shadow na" id="keyNu"></div>
+                <div class="key shadow ha" id="keyFu"></div>
+                <div class="key shadow aa" id="keyA"></div>
+                <div class="key shadow aa" id="keyU"></div>
+                <div class="key shadow aa" id="keyE"></div>
+                <div class="key shadow aa" id="keyO"></div>
+                <div class="key shadow ya" id="keyYa"></div>
+                <div class="key shadow ya" id="keyYu"></div>
+                <div class="key shadow ya" id="keyYo"></div>
+                <div class="key shadow wa" id="keyWa"></div>
+                <div class="key shadow ha" id="keyHo"></div>
+                <div class="key shadow op" id="keyP"></div>
+                <div class="key shadow backspace op" id="keyBackspace"></div>
+            </div>
+            <div class="keyboardRow">
+                <!-- 痛苦 * 2 -->
+                <div class="key shadow tab op" id="keyTab"></div>
+                <div class="key shadow ta" id="keyTa"></div>
+                <div class="key shadow ta" id="keyTe"></div>
+                <div class="key shadow aa" id="keyI"></div>
+                <div class="key shadow sa" id="keySu"></div>
+                <div class="key shadow ka" id="keyKa"></div>
+                <div class="key shadow wa" id="keyN"></div>
+                <div class="key shadow na" id="keyNa"></div>
+                <div class="key shadow na" id="keyNi"></div>
+                <div class="key shadow ra" id="keyRa"></div>
+                <div class="key shadow sa" id="keySe"></div>
+                <div class="key shadow op" id="keyG"></div>
+                <div class="key shadow ma" id="keyMu"></div>
+                <div class="key shadow ha" id="keyHe"></div>
+            </div>
+            <div class="keyboardRow">
+                <!-- 痛苦 * 3 -->
+                <div class="key shadow capslock op" id="keyCapslock"></div>
+                <div class="key shadow ta" id="keyChi"></div>
+                <div class="key shadow ta" id="keyTo"></div>
+                <div class="key shadow sa" id="keyShi"></div>
+                <div class="key shadow ha" id="keyHa"></div>
+                <div class="key shadow ka" id="keyKi"></div>
+                <div class="key shadow ka" id="keyKu"></div>
+                <div class="key shadow ma" id="keyMa"></div>
+                <div class="key shadow na" id="keyNo"></div>
+                <div class="key shadow ra" id="keyRi"></div>
+                <div class="key shadow ra" id="keyRe"></div>
+                <div class="key shadow ka" id="keyKe"></div>
+                <div class="key shadow enter op" id="keyEnter"></div>
+            </div>
+            <div class="keyboardRow">
+                <!-- 痛苦 * 4 -->
+                <div class="key shadow shift op" id="keyShiftLeft"></div>
+                <div class="key shadow ta" id="keyTsu"></div>
+                <div class="key shadow sa" id="keySa"></div>
+                <div class="key shadow sa" id="keySo"></div>
+                <div class="key shadow ha" id="keyHi"></div>
+                <div class="key shadow ka" id="keyKo"></div>
+                <div class="key shadow ma" id="keyMi"></div>
+                <div class="key shadow ma" id="keyMo"></div>
+                <div class="key shadow na" id="keyNe"></div>
+                <div class="key shadow ra" id="keyRu"></div>
+                <div class="key shadow ma" id="keyMe"></div>
+                <div class="key shadow shift op" id="keyShiftRight"></div>
+            </div>
+            <div class="keyboardRow">
+                <!-- 这个还好 -->
+                <div class="key shadow spaceLeft"></div>
+                <div class="key shadow space" id="keySpace"></div>
+                <div class="key shadow spaceRight"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/stage/japaneseMaster.js"></script>
+    <script src="/static/js/stage/keyboard/keyboard.js"></script>
+    <script src="/static/js/stage/keyboard/keySound.js"></script>
+    <script src="/static/js/stage/keyboard/keyPress.js"></script>
+    <script src="/static/js/stage/textController.js"></script>
+    <script src="/static/js/stage/keyboard/waitKey.js"></script>
+    <script src="/static/js/stage/keyboard/hint.js"></script>
+    <script type="module">
+        import { messager, type } from '/static/js/stage/coach.js';
+        $(async () => {
+        <% let usedType = false;
+            let last = 'study';
+            let lastc = '';
+            for (let i of stage.content) {
+                if (typeof (i) == 'string') {
+                    if (i == lastc)
+                        i = shuffle(i.split('')).join('');
+                    else
+                        lastc = i;
+                    i = {
+                        type: last,
+                        content: i
+                    }
+                }
+                else if(i.type != 'message'){
+                    lastc = i.content;
+                }
+                if (i.type == 'message') {
+                    last = 'message' %>
+                        await messager('<%- i.content %>');
+            <% } else {
+                    if (usedType == false) { %>
+                        // 浮现动画
+                        $('#keyboard').animate({
+                            opacity: 1,
+                            top: '-=10px'
+                        }, 200);
+                    <% usedType = true;
+                    }
+                    if (i.type == 'study') {
+                        last = 'study';
+                        if (typeof (i.content) == 'string') { %>
+                            await type('<%- i.content %>');
+                    <% } else if (typeof (i.content) == 'object') { %>
+                            await type(<%- JSON.stringify(i.content) %>);
+                    <% }
+                    } else if (i.type == 'test') {
+                        last = 'test';
+                        if (typeof (i.content) == 'string') { %>
+                            await type('<%- i.content %>', true);
+                    <% } else if (typeof (i.content) == 'object') { %>
+                            await type(<%- JSON.stringify(i.content, true) %>);
+                    <% }
+                    }
+                }
+            } %>
+                // —— 如果这样做，会不会有人投机取巧？
+                // —— 坏孩子是不会在这个网站上学到东西的。
+                $.ajax({
+                    url: '/finished/<%- stageId %>',
+                    method: 'post',
+                    success: async () => {
+                        await swal({
+                            icon: 'success',
+                            title: '恭喜',
+                            text: '你已经完成第<%- num2hanzi(stageId) %>关',
+                            timer: 2000,
+                            closeOnClickOutside: false,
+                            closeOnEsc: false,
+                            buttons: false
+                        });
+                        location = '/';
+                    }
+                });
+        });
+    </script>
+    <%- include('footer.ejs'); %>

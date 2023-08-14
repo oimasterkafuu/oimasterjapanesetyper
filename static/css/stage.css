@@ -1,0 +1,23 @@
+/* 每个 stage 内部的布局 */
+/* 主要用于页面的上半部分 */
+/* 键盘部分由 keyboard.css 管 */
+
+p.secondTitle {
+    font-size: 30px;
+}
+
+.bigChar {
+    font-size: 50px;
+}
+
+.smallChar {
+    font-size: 20px;
+}
+
+.unactive {
+    opacity: 0.6;
+}
+
+.active {
+    font-weight: bold;
+}

@@ -1,0 +1,34 @@
+/* 404 Not found 的专用 CSS */
+/* 服务无人区 QWQ */
+/* 去 /oimasterkafuu 监督我服务！ */
+
+div.errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+i.errorIcon {
+    font-size: 200px;
+    animation: shaking 2s ease-in-out infinite;
+}
+
+@keyframes shaking{
+    0%{
+        transform: rotate(-20deg);
+    }
+    50%{
+        transform: rotate(20deg);
+    }
+    100%{
+        transform: rotate(-20deg);
+    }
+}
+
+p.errorMessage {
+    font-size: 70px;
+}
+
+p.errorMessageSmall {
+    font-size: 40px;
+}

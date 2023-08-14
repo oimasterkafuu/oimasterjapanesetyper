@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "name": "Launch Chrome",
+        "request": "launch",
+        "type": "chrome",
+        "url": "http://localhost",
+        "webRoot": "${workspaceFolder}"
+    },
+    {
+        "command": "npm test",
+        "name": "Run npm test",
+        "request": "launch",
+        "type": "node-terminal"
+    },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动程序",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/index.js"
+        }
+    ]
+}

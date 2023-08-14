@@ -1,0 +1,133 @@
+/* 键盘 css */
+/* 不知道写了多久 */
+
+div.keyboard {
+    width: 900px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* 边框 */
+    padding: 20px;
+    border-radius: 30px;
+    background-color: #eff;
+    /* 初始化时不可见 */
+    opacity: 0;
+    top: 10px;
+    position: relative;
+}
+
+div.keyboardRow {
+    flex-basis: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.key {
+    flex-grow: 1;
+    margin: 2px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#keyInfo {
+    color: #fff;
+}
+
+/* 以下比例按照作者用机 MacBook Air 设计 */
+div.backspace,
+div.tab {
+    flex-grow: 1.5;
+}
+
+div.capslock,
+div.enter {
+    flex-grow: 1.7;
+}
+
+div.shift {
+    flex-grow: 2.2;
+}
+
+div.space {
+    flex-grow: 5;
+}
+
+div.spaceLeft {
+    flex-grow: 4;
+    opacity: 0;
+}
+
+div.spaceRight {
+    flex-grow: 5;
+    opacity: 0;
+}
+
+/* 各行假名标色 */
+div.aa {
+    /* あ行 */
+    background-color: #add8e6;
+}
+
+div.ka {
+    background-color: #f08080;
+}
+
+div.sa {
+    background-color: #ffffe0;
+}
+
+div.ta {
+    background-color: #eaeae2;
+}
+
+div.na {
+    background-color: #d3d3d3;
+}
+
+div.ha {
+    background-color: #90ee90;
+}
+
+div.ma {
+    background-color: #ffb6c1;
+}
+
+div.ya {
+    background-color: #ffa07a;
+}
+
+div.ra {
+    background-color: #20b2aa;
+}
+
+div.wa {
+    /* 顺便把「ん」带上 */
+    background-color: #87cefa;
+}
+
+div.op {
+    /* 操作符 */
+    background-color: #ffffff;
+}
+
+div.noneKey {
+    background-color: #fff !important;
+    color: #fff !important;
+}
+
+
+div.hint {
+    transition: ease-in-out 0.5s;
+    background-color: #ffd700;
+}
+
+div.highlighted {
+    transition: ease-in-out 0.2s;
+    background-color: #33f !important;
+    color: white;
+}
